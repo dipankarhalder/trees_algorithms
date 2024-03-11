@@ -134,3 +134,87 @@ node3.addAdjacent(node5);
 console.log("BFS traversal:");
 bfs(node1);
 ```
+
+#### 3. Binary Search Tree (BST)
+
+A Binary Search Tree (BST) is a binary tree data structure where each node has at most two children (referred to as the left child and the right child), and the key (or value) of each node is greater than the keys in its left subtree and less than the keys in its right subtree.
+
+Properties:
+
+- All nodes in the left subtree have values less than the node's value.
+- All nodes in the right subtree have values greater than the node's value.
+
+```javascript
+// Node class to represent a node in BST
+class TreeNode {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+// Binary Search Tree class
+class BST {
+  constructor() {
+    this.root = null;
+  }
+
+  // Method to insert a value into BST
+  insert(value) {
+    const newNode = new TreeNode(value);
+    if (!this.root) {
+      this.root = newNode;
+      return this;
+    }
+
+    let current = this.root;
+    while (true) {
+      if (value < current.value) {
+        if (!current.left) {
+          current.left = newNode;
+          return this;
+        }
+        current = current.left;
+      } else if (value > current.value) {
+        if (!current.right) {
+          current.right = newNode;
+          return this;
+        }
+        current = current.right;
+      } else {
+        // If the value already exists in the BST
+        return undefined;
+      }
+    }
+  }
+
+  // Method to search for a value in BST
+  search(value) {
+    let current = this.root;
+    while (current) {
+      if (value === current.value) {
+        return true;
+      } else if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
+}
+
+// Example usage:
+const bst = new BST();
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+bst.insert(3);
+bst.insert(7);
+bst.insert(12);
+bst.insert(17);
+
+console.log(bst.search(12)); // Output: true
+console.log(bst.search(20)); // Output: false
+```
